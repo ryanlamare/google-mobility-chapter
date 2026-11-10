@@ -1,0 +1,271 @@
+-------------------------------------------------------------------------------
+      name:  fig3
+       log:  /Users/rlamare/Sites/mobility-chapter-replication/package/output/f
+> igure3_margins.log
+  log type:  text
+ opened on:  10 Nov 2026, 23:34:00
+
+. foreach y in workplacemob residentmob {
+  2.     display _n "==== `y', lockdown 2020 ===="
+  3.     quietly reg `y' c.um_cps##c.blackalone_prop c.um_cps##c.per_gop `contr
+> ols'
+  4.     quietly summarize um_cps if e(sample), detail
+  5.     local u10 = r(p10)
+  6.     local u90 = r(p90)
+  7.     quietly summarize blackalone_prop if e(sample), detail
+  8.     local b10 = r(p10)
+  9.     local b90 = r(p90)
+ 10.     display "union membership p10/p90: `u10' / `u90'; Black share p10/p90:
+>  `b10' / `b90'"
+ 11.     /*the lines in Figure 3*/
+.     margins, at(um_cps=(`u10' `u90') blackalone_prop=(0(.05).5)) saving("outp
+> ut/margins_`y'.dta", replace)
+ 12.     /*predictions at the 10th and 90th percentiles of both measures*/
+.     margins, at(um_cps=(`u10' `u90') blackalone_prop=(`b10' `b90')) pwcompare
+> (effects)
+ 13.     /*difference in the Black-share effect between high and low union memb
+> ership*/
+.     lincom (`u90' - `u10') * (`b90' - `b10') * c.um_cps#c.blackalone_prop
+ 14. }
+
+==== workplacemob, lockdown 2020 ====
+union membership p10/p90: .0347562623091207 / .1997400962301247; Black share p1
+> 0/p90: .0144354710355401 / .2802136242389679
+
+Predictive margins                                         Number of obs = 278
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+1._at:  um_cps          = .0347563
+        blackalone_prop =        0
+2._at:  um_cps          = .0347563
+        blackalone_prop =      .05
+3._at:  um_cps          = .0347563
+        blackalone_prop =       .1
+4._at:  um_cps          = .0347563
+        blackalone_prop =      .15
+5._at:  um_cps          = .0347563
+        blackalone_prop =       .2
+6._at:  um_cps          = .0347563
+        blackalone_prop =      .25
+7._at:  um_cps          = .0347563
+        blackalone_prop =       .3
+8._at:  um_cps          = .0347563
+        blackalone_prop =      .35
+9._at:  um_cps          = .0347563
+        blackalone_prop =       .4
+10._at: um_cps          = .0347563
+        blackalone_prop =      .45
+11._at: um_cps          = .0347563
+        blackalone_prop =       .5
+12._at: um_cps          = .1997401
+        blackalone_prop =        0
+13._at: um_cps          = .1997401
+        blackalone_prop =      .05
+14._at: um_cps          = .1997401
+        blackalone_prop =       .1
+15._at: um_cps          = .1997401
+        blackalone_prop =      .15
+16._at: um_cps          = .1997401
+        blackalone_prop =       .2
+17._at: um_cps          = .1997401
+        blackalone_prop =      .25
+18._at: um_cps          = .1997401
+        blackalone_prop =       .3
+19._at: um_cps          = .1997401
+        blackalone_prop =      .35
+20._at: um_cps          = .1997401
+        blackalone_prop =       .4
+21._at: um_cps          = .1997401
+        blackalone_prop =      .45
+22._at: um_cps          = .1997401
+        blackalone_prop =       .5
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |  -.3138606   .0047136   -66.59   0.000    -.3231509   -.3045702
+          2  |  -.3101367   .0037623   -82.43   0.000     -.317552   -.3027214
+          3  |  -.3064129   .0031068   -98.63   0.000    -.3125363   -.3002895
+          4  |   -.302689   .0029514  -102.56   0.000    -.3085061   -.2968719
+          5  |  -.2989652   .0033661   -88.82   0.000    -.3055995   -.2923308
+          6  |  -.2952413   .0041846   -70.55   0.000     -.303489   -.2869937
+          7  |  -.2915175   .0052204   -55.84   0.000    -.3018066   -.2812283
+          8  |  -.2877936   .0063682   -45.19   0.000    -.3003452   -.2752421
+          9  |  -.2840698   .0075775   -37.49   0.000    -.2990046   -.2691349
+         10  |  -.2803459   .0088228   -31.78   0.000    -.2977353   -.2629565
+         11  |  -.2766221    .010091   -27.41   0.000    -.2965109   -.2567332
+         12  |  -.3037247   .0049571   -61.27   0.000    -.3134949   -.2939545
+         13  |   -.307354   .0040604   -75.70   0.000    -.3153569   -.2993512
+         14  |  -.3109834   .0035623   -87.30   0.000    -.3180046   -.3039622
+         15  |  -.3146127   .0036309   -86.65   0.000    -.3217691   -.3074564
+         16  |  -.3182421   .0042386   -75.08   0.000    -.3265963   -.3098879
+         17  |  -.3218714   .0051999   -61.90   0.000    -.3321201   -.3116227
+         18  |  -.3255008   .0063561   -51.21   0.000    -.3380285   -.3129731
+         19  |  -.3291301   .0076192   -43.20   0.000    -.3441472    -.314113
+         20  |  -.3327595   .0089439   -37.21   0.000    -.3503875   -.3151314
+         21  |  -.3363888   .0103065   -32.64   0.000    -.3567025   -.3160751
+         22  |  -.3400182   .0116938   -29.08   0.000    -.3630661   -.3169702
+------------------------------------------------------------------------------
+(file output/margins_workplacemob.dta not found)
+
+Pairwise comparisons of predictive margins                 Number of obs = 278
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+1._at: um_cps          = .0347563
+       blackalone_prop = .0144355
+2._at: um_cps          = .0347563
+       blackalone_prop = .2802136
+3._at: um_cps          = .1997401
+       blackalone_prop = .0144355
+4._at: um_cps          = .1997401
+       blackalone_prop = .2802136
+
+------------------------------------------------------------------------------
+             |            Delta-method    Unadjusted           Unadjusted
+             |   Contrast   std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         _at |
+     2 vs 1  |   .0197944   .0070928     2.79   0.006     .0058147     .033774
+     3 vs 1  |   .0080129   .0073928     1.08   0.280    -.0065579    .0225838
+     4 vs 1  |  -.0112791   .0081982    -1.38   0.170    -.0274373    .0048791
+     3 vs 2  |  -.0117814   .0083831    -1.41   0.161    -.0283042    .0047413
+     4 vs 2  |  -.0310735   .0080019    -3.88   0.000    -.0468449    -.015302
+     4 vs 3  |   -.019292   .0077847    -2.48   0.014    -.0346354   -.0039487
+------------------------------------------------------------------------------
+
+ ( 1)  .0438491*c.um_cps#c.blackalone_prop = 0
+
+------------------------------------------------------------------------------
+workplacemob | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0390864   .0095972    -4.07   0.000    -.0580021   -.0201706
+------------------------------------------------------------------------------
+
+==== residentmob, lockdown 2020 ====
+union membership p10/p90: .0347562623091207 / .1997400962301247; Black share p1
+> 0/p90: .0144354710355401 / .2802136242389679
+
+Predictive margins                                         Number of obs = 278
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+1._at:  um_cps          = .0347563
+        blackalone_prop =        0
+2._at:  um_cps          = .0347563
+        blackalone_prop =      .05
+3._at:  um_cps          = .0347563
+        blackalone_prop =       .1
+4._at:  um_cps          = .0347563
+        blackalone_prop =      .15
+5._at:  um_cps          = .0347563
+        blackalone_prop =       .2
+6._at:  um_cps          = .0347563
+        blackalone_prop =      .25
+7._at:  um_cps          = .0347563
+        blackalone_prop =       .3
+8._at:  um_cps          = .0347563
+        blackalone_prop =      .35
+9._at:  um_cps          = .0347563
+        blackalone_prop =       .4
+10._at: um_cps          = .0347563
+        blackalone_prop =      .45
+11._at: um_cps          = .0347563
+        blackalone_prop =       .5
+12._at: um_cps          = .1997401
+        blackalone_prop =        0
+13._at: um_cps          = .1997401
+        blackalone_prop =      .05
+14._at: um_cps          = .1997401
+        blackalone_prop =       .1
+15._at: um_cps          = .1997401
+        blackalone_prop =      .15
+16._at: um_cps          = .1997401
+        blackalone_prop =       .2
+17._at: um_cps          = .1997401
+        blackalone_prop =      .25
+18._at: um_cps          = .1997401
+        blackalone_prop =       .3
+19._at: um_cps          = .1997401
+        blackalone_prop =      .35
+20._at: um_cps          = .1997401
+        blackalone_prop =       .4
+21._at: um_cps          = .1997401
+        blackalone_prop =      .45
+22._at: um_cps          = .1997401
+        blackalone_prop =       .5
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1264426   .0021639    58.43   0.000     .1221775    .1307076
+          2  |   .1259108   .0017272    72.90   0.000     .1225066     .129315
+          3  |    .125379   .0014263    87.91   0.000     .1225679    .1281901
+          4  |   .1248472   .0013549    92.14   0.000     .1221767    .1275177
+          5  |   .1243154   .0015453    80.45   0.000     .1212697    .1273611
+          6  |   .1237836   .0019211    64.43   0.000     .1199973      .12757
+          7  |   .1232519   .0023966    51.43   0.000     .1185283    .1279754
+          8  |   .1227201   .0029235    41.98   0.000     .1169579    .1284823
+          9  |   .1221883   .0034787    35.12   0.000      .115332    .1290446
+         10  |   .1216565   .0040504    30.04   0.000     .1136733    .1296397
+         11  |   .1211247   .0046326    26.15   0.000     .1119941    .1302553
+         12  |   .1269319   .0022757    55.78   0.000     .1224466    .1314172
+         13  |   .1281205    .001864    68.73   0.000     .1244466    .1317945
+         14  |   .1293091   .0016354    79.07   0.000     .1260858    .1325324
+         15  |   .1304977   .0016669    78.29   0.000     .1272123     .133783
+         16  |   .1316863   .0019459    67.67   0.000      .127851    .1355215
+         17  |   .1328749   .0023872    55.66   0.000     .1281699    .1375799
+         18  |   .1340635    .002918    45.94   0.000     .1283122    .1398147
+         19  |    .135252   .0034978    38.67   0.000      .128358    .1421461
+         20  |   .1364406    .004106    33.23   0.000     .1283479    .1445334
+         21  |   .1376292   .0047315    29.09   0.000     .1283036    .1469549
+         22  |   .1388178   .0053684    25.86   0.000     .1282369    .1493987
+------------------------------------------------------------------------------
+(file output/margins_residentmob.dta not found)
+
+Pairwise comparisons of predictive margins                 Number of obs = 278
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+1._at: um_cps          = .0347563
+       blackalone_prop = .0144355
+2._at: um_cps          = .0347563
+       blackalone_prop = .2802136
+3._at: um_cps          = .1997401
+       blackalone_prop = .0144355
+4._at: um_cps          = .1997401
+       blackalone_prop = .2802136
+
+------------------------------------------------------------------------------
+             |            Delta-method    Unadjusted           Unadjusted
+             |   Contrast   std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         _at |
+     2 vs 1  |  -.0028267   .0032562    -0.87   0.386    -.0092445    .0035911
+     3 vs 1  |    .000986   .0033939     0.29   0.772    -.0057032    .0076753
+     4 vs 1  |   .0073041   .0037636     1.94   0.054    -.0001139     .014722
+     3 vs 2  |   .0038128   .0038485     0.99   0.323    -.0037725    .0113981
+     4 vs 2  |   .0101308   .0036735     2.76   0.006     .0028904    .0173712
+     4 vs 3  |    .006318   .0035738     1.77   0.078    -.0007258    .0133619
+------------------------------------------------------------------------------
+
+ ( 1)  .0438491*c.um_cps#c.blackalone_prop = 0
+
+------------------------------------------------------------------------------
+ residentmob | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .0091448   .0044059     2.08   0.039     .0004609    .0178286
+------------------------------------------------------------------------------
+
+. log close fig3
+      name:  fig3
+       log:  /Users/rlamare/Sites/mobility-chapter-replication/package/output/f
+> igure3_margins.log
+  log type:  text
+ closed on:  10 Nov 2026, 23:34:00
+-------------------------------------------------------------------------------

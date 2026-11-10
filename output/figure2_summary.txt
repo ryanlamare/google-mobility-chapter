@@ -1,0 +1,8 @@
+Weeks in Figure 2: 138, weeks ending 2020-02-23 to 2022-10-09
+Week ending 2020-04-12: workplaces -49.0, retail and recreation -45.7
+Last eight weeks (2022-08-15 to 2022-10-09): retail and recreation -8.2, workplaces -21.2, time at home 3.6
+Workplaces in the last eight weeks: weekdays -25.8, weekends -9.6
+Lowest five weeks for workplaces: 2020-04-12 (-49.0), 2020-04-05 (-46.1), 2020-04-19 (-45.3), 2020-04-26 (-44.4), 2022-01-02 (-43.6)
+Lowest five weeks for workplaces after June 2020: 2022-01-02 (-43.6), 2020-12-27 (-43.3), 2021-01-03 (-42.6), 2021-12-26 (-41.6), 2020-11-29 (-40.9)
+Weeks in which workplaces is at or above retail and recreation: 0
+US counties in the files: 2837; days: 974 (2020-02-15 to 2022-10-15)
