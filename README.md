@@ -1,5 +1,7 @@
 # Some Went to Work While Others Stayed Home: replication files
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24122093.svg)](https://doi.org/10.5281/zenodo.24122093)
+
 Data and code to reproduce the figures and the union membership results in
 
 Lamare, J. Ryan. "Some Went to Work While Others Stayed Home: Covid-Era Google Mobility Data and the Double-Edged Implications of Tracking Workers." Chapter prepared for the 2027 LERA Research Volume, *Emerging Data and Methods in Work and Employment Relations*.
@@ -9,6 +11,8 @@ The chapter builds on
 Lamare, J. Ryan, Richard A. Benton and Patricia Michel Tabarani. 2024. "An Empirical Analysis of Race and Political Partisanship Effects on Workplace Mobility Patterns during Lockdown, Reopening, and Endemic COVID-19." *ILR Review* 77(4): 475-505. https://doi.org/10.1177/00197939241246510
 
 and the county data and the Figure 1 estimates here are taken from that article. This repository does not reproduce the article's own tables.
+
+Each tagged release of this repository is archived on Zenodo, and the DOI above resolves to the most recent version.
 
 The code takes Google's COVID-19 Community Mobility Reports and a county-level file and produces the national weekly series in Figure 2, the coverage counts quoted in the text, the union membership regressions, and the predictions in Figure 3. The numbers plotted in Figure 1 are included as a data file. All results are written to the output folder.
 
